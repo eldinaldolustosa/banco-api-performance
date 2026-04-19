@@ -2,6 +2,7 @@
 
 import http from 'k6/http';
 import { sleep, check } from 'k6';
+const postlogin = JSON.parse(open('../fixtures/postlogin.json'));
 
 export const options = {
   //vus : 10,
@@ -19,10 +20,7 @@ export const options = {
 
 export default function (){
     const url = 'http://localhost:3000/login';
-    const payload = JSON.stringify({
-        username: 'julio.lima',
-        senha: '123456',
-    });
+    const payload = JSON.stringify(postlogin);
     
     const params = {
         headers: {
