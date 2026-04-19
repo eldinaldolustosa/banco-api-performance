@@ -3,6 +3,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
+import { pegarBaseURL } from '../utils/variaveis.js';
 
 export const options = {
   //vus : 10,
@@ -19,7 +20,9 @@ export const options = {
 };
 
 export default function (){
-    const url = 'http://localhost:3000/login';
+    const url = pegarBaseURL()  + '/login';
+    //__ENV.BASE_URL + '/login' -> Terminal: k6 run tests/transferencias.test.js -e BASE_URL=http://localhost:3000
+
     const payload = JSON.stringify(postLogin);
     
     const params = {

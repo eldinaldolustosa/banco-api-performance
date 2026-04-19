@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { obterToken } from '../helpers/autenticacao.js';
+import { pegarBaseURL } from '../utils/variaveis.js';
 
 export const options = {
   interations: 10,
@@ -8,8 +9,9 @@ export const options = {
 
 export default function() {
   const token = obterToken();
-  const url = 'http://localhost:3000/transferencias';
-
+  const url = pegarBaseURL() + '/transferencias';
+  // Terminal: k6 run tests/transferencias.test.js -e BASE_URL=http://localhost:3000
+  
   const payload = JSON.stringify({
     contaOrigem: 1,
     contaDestino: 2,
