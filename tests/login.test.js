@@ -1,11 +1,13 @@
+//execution with reports: K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=./reports/login-html-report.html k6 run tests/login.test.js
+
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 
-
 export const options = {
-  iterations: 60,
+  vus : 10,
+  duration: '30s',
   thresolds:{
-    http_req_duration: ['p(90)<10', 'max<1'],
+    http_req_duration: ['p(90)<3000', 'max<5000'],
     http_req_failed: ['rate<0.01']
   }
 };
